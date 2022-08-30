@@ -1,10 +1,16 @@
-import React from "react";
+import { Space } from "antd";
+import React, { useState } from "react";
+import { RepositoriesSearchInput } from "../components/RepositoriesSearchInput";
 import { RepositoriesTable } from "../components/RepositoriesTable";
 import { useSearchRepositories } from "../hooks/useSearchRepositories";
 
+const INITIAL_SEARCH_QUERY = "react";
+
 export const SearchRepositoriesPage: React.FC = () => {
+  const [query, setQuery] = useState(INITIAL_SEARCH_QUERY);
+
   const { data, loading, error } = useSearchRepositories({
-    query: "react",
+    query,
     first: 10,
     cursor: 0,
   });
@@ -13,5 +19,10 @@ export const SearchRepositoriesPage: React.FC = () => {
     <div>{error.message}</div>;
   }
 
-  return <RepositoriesTable data={data?.search.repositories} loading={loading} />;
+  return (
+    <Space direction="vertical" style={{ width: "100%" }}>
+      <RepositoriesSearchInput placeholder={INITIAL_SEARCH_QUERY} onSearch={setQuery} />
+      <RepositoriesTable data={data?.search.repositories} loading={loading} />
+    </Space>
+  );
 };
