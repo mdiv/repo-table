@@ -13,12 +13,12 @@ interface SearchRepositoriesData {
 interface SearchRepositoryVariables {
   query: string;
   first: number;
-  before?: string;
+  after?: string;
 }
 
 const SEARCH_REPOSITORIES = gql`
-  query ($query: String!, $first: Int!, $before: String) {
-    search(type: REPOSITORY, query: $query, first: $first, before: $before) {
+  query ($query: String!, $first: Int!, $after: String) {
+    search(type: REPOSITORY, query: $query, first: $first, after: $after) {
       repositories: nodes {
         ... on Repository {
           id
@@ -33,7 +33,7 @@ const SEARCH_REPOSITORIES = gql`
   }
 `;
 
-// GitHub expects a Base64 encoded cursor:{value} format for pagination
+// GitHub expects a Base64 encoded "cursor:{value}"" format for pagination
 // e.g. 1 -> cursor:1 -> Y3Vyc29yOjE=
 export const encodeCursor = (value: number) => btoa(`cursor:${value.toString()}`);
 
@@ -46,13 +46,13 @@ interface Options {
 export const useSearchRepositories = (options: Options) => {
   const { query, first, cursor = DEFAULT_BEFORE_CURSOR } = options;
 
-  const before = typeof cursor === "number" ? encodeCursor(cursor) : cursor;
+  const after = typeof cursor === "number" ? encodeCursor(cursor) : cursor;
 
   return useQuery<SearchRepositoriesData, SearchRepositoryVariables>(SEARCH_REPOSITORIES, {
     variables: {
       query,
       first,
-      before,
+      after,
     },
   });
 };
