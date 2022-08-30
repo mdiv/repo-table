@@ -1,7 +1,7 @@
 export interface Repository {
   id: string;
   nameWithOwner: string;
-  homepageUrl: string;
+  url: string;
   forkCount: number;
   stargazerCount: number;
 }

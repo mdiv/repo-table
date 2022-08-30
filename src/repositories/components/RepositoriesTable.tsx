@@ -9,7 +9,7 @@ const COLUMNS: ColumnsType<Repository> = [
     key: "nameWithOwner",
     dataIndex: "nameWithOwner",
     render: (value, record) => (
-      <Typography.Link href={record.homepageUrl} target="_blank">
+      <Typography.Link href={record.url} target="_blank">
         {value}
       </Typography.Link>
     ),

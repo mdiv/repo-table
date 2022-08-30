@@ -18,14 +18,14 @@ test("renders table data", () => {
     {
       id: "1",
       nameWithOwner: "joe/react",
-      homepageUrl: "http://www.github.com/joe/react",
+      url: "http://www.github.com/joe/react",
       stargazerCount: 100,
       forkCount: 3,
     },
     {
       id: "2",
       nameWithOwner: "peter/typescript",
-      homepageUrl: "http://www.github.com/peter/typescript",
+      url: "http://www.github.com/peter/typescript",
       stargazerCount: 50,
       forkCount: 2,
     },
@@ -53,14 +53,14 @@ test("uses pagination", () => {
     {
       id: "1",
       nameWithOwner: "joe/react",
-      homepageUrl: "http://www.github.com/joe/react",
+      url: "http://www.github.com/joe/react",
       stargazerCount: 100,
       forkCount: 3,
     },
     {
       id: "2",
       nameWithOwner: "peter/typescript",
-      homepageUrl: "http://www.github.com/peter/typescript",
+      url: "http://www.github.com/peter/typescript",
       stargazerCount: 50,
       forkCount: 2,
     },

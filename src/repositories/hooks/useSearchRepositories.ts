@@ -23,7 +23,7 @@ const SEARCH_REPOSITORIES = gql`
         ... on Repository {
           id
           nameWithOwner
-          homepageUrl
+          url
           forkCount
           stargazerCount
         }
