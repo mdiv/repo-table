@@ -1,8 +1,6 @@
-# Getting Started with Create React App
+A simple React application that searches GitHub repositories and displays them in a table.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It get repositories from [GitHub GraphQL API](https://docs.github.com/en/graphql) and renders the results in a table.
-
-## Environment
+## Setup
 
 GitHub GraphQL API requires an OAuth token for authentication.
 
