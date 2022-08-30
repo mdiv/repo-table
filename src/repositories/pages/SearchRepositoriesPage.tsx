@@ -1,4 +1,4 @@
-import { Space } from "antd";
+import { Layout, Space } from "antd";
 import React, { useState } from "react";
 import { RepositoriesSearchInput } from "../components/RepositoriesSearchInput";
 import { RepositoriesTable } from "../components/RepositoriesTable";
@@ -33,18 +33,22 @@ export const SearchRepositoriesPage: React.FC = () => {
   };
 
   return (
-    <Space direction="vertical" style={{ width: "100%" }}>
-      <RepositoriesSearchInput placeholder={INITIAL_SEARCH_QUERY} onSearch={setQuery} />
-      <RepositoriesTable
-        data={data?.search.repositories}
-        loading={loading}
-        pagination={{
-          page: currentPage,
-          pageSize,
-          total: data?.search.repositoryCount,
-          onChange: onPageChange,
-        }}
-      />
-    </Space>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Layout.Content style={{ width: "100%", maxWidth: "600px", margin: "16px auto" }}>
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <RepositoriesSearchInput placeholder={INITIAL_SEARCH_QUERY} onSearch={setQuery} />
+          <RepositoriesTable
+            data={data?.search.repositories}
+            loading={loading}
+            pagination={{
+              page: currentPage,
+              pageSize,
+              total: data?.search.repositoryCount,
+              onChange: onPageChange,
+            }}
+          />
+        </Space>
+      </Layout.Content>
+    </Layout>
   );
 };
