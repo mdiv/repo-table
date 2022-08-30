@@ -31,12 +31,32 @@ const COLUMNS: ColumnsType<Repository> = [
 interface Props {
   data?: Repository[];
   loading?: boolean;
+  pagination?: {
+    page?: number;
+    pageSize?: number;
+    total?: number;
+    onChange?: (page: number, pageSize: number) => void;
+  };
 }
 
 export const RepositoriesTable: React.FC<Props> = (props) => {
-  const { data, loading } = props;
+  const { data, loading, pagination } = props;
 
   const keyedData = data?.map((repository) => ({ ...repository, key: repository.id }));
 
-  return <Table columns={COLUMNS} dataSource={keyedData} loading={loading} pagination={false} />;
+  return (
+    <Table
+      columns={COLUMNS}
+      dataSource={keyedData}
+      loading={loading}
+      pagination={
+        pagination
+          ? {
+              position: ["bottomCenter"],
+              ...pagination,
+            }
+          : false
+      }
+    />
+  );
 };

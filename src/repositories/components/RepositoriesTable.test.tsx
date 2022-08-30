@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Repository } from "../models/Repository";
 import { RepositoriesTable } from "./RepositoriesTable";
 
@@ -46,4 +46,43 @@ test("renders table data", () => {
   expect(screen.getByText("peter/typescript").getAttribute("href")).toBe("http://www.github.com/peter/typescript");
   expect(stars2.textContent).toBe("🌟 50");
   expect(forks2.textContent).toBe("🍴 2");
+});
+
+test("uses pagination", () => {
+  const data: Repository[] = [
+    {
+      id: "1",
+      nameWithOwner: "joe/react",
+      homepageUrl: "http://www.github.com/joe/react",
+      stargazerCount: 100,
+      forkCount: 3,
+    },
+    {
+      id: "2",
+      nameWithOwner: "peter/typescript",
+      homepageUrl: "http://www.github.com/peter/typescript",
+      stargazerCount: 50,
+      forkCount: 2,
+    },
+  ];
+
+  render(
+    <RepositoriesTable
+      data={data}
+      pagination={{
+        page: 1,
+        pageSize: 1,
+      }}
+    />,
+  );
+
+  expect(screen.getAllByRole("cell")).toHaveLength(3);
+  expect(screen.getByText("joe/react")).toBeInTheDocument();
+  expect(screen.queryByText("peter/typescript")).not.toBeInTheDocument();
+
+  fireEvent.click(screen.getByRole("button", { name: "right" }), { bubbles: true });
+
+  expect(screen.getAllByRole("cell")).toHaveLength(3);
+  expect(screen.getByText("peter/typescript")).toBeInTheDocument();
+  expect(screen.queryByText("joe/react")).not.toBeInTheDocument();
 });
