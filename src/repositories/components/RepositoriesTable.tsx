@@ -32,7 +32,7 @@ interface Props {
   data?: Repository[];
   loading?: boolean;
   pagination?: {
-    page?: number;
+    current?: number;
     pageSize?: number;
     total?: number;
     onChange?: (page: number, pageSize: number) => void;

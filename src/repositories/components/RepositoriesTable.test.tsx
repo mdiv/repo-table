@@ -70,7 +70,6 @@ test("uses pagination", () => {
     <RepositoriesTable
       data={data}
       pagination={{
-        page: 1,
         pageSize: 1,
       }}
     />,

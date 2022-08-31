@@ -27,6 +27,11 @@ export const SearchRepositoriesPage: React.FC = () => {
     <div>{error.message}</div>;
   }
 
+  const onSearch = (query: string) => {
+    setCurrentPage(1);
+    setQuery(query);
+  }
+
   const onPageChange = (page: number, pageSize: number) => {
     setCurrentPage(page);
     setPageSize(pageSize);
@@ -36,12 +41,12 @@ export const SearchRepositoriesPage: React.FC = () => {
     <Layout style={{ minHeight: "100vh" }}>
       <Layout.Content style={{ width: "100%", maxWidth: "600px", margin: "16px auto" }}>
         <Space direction="vertical" style={{ width: "100%" }}>
-          <RepositoriesSearchInput placeholder={INITIAL_SEARCH_QUERY} onSearch={setQuery} />
+          <RepositoriesSearchInput placeholder={INITIAL_SEARCH_QUERY} onSearch={onSearch} />
           <RepositoriesTable
             data={data?.search.repositories}
             loading={loading}
             pagination={{
-              page: currentPage,
+              current: currentPage,
               pageSize,
               total: data?.search.repositoryCount,
               onChange: onPageChange,
